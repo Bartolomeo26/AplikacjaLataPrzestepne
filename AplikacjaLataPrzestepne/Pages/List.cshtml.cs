@@ -24,19 +24,19 @@ namespace AplikacjaLataPrzestepne.Pages
             Configuration = configuration;
             _contextAccessor = contextAccessor;
         }
-        public RokPrzestepny object_toSearch { get; set; } = new RokPrzestepny();
+        public RokPrzestepny obiekt_doSzukania { get; set; } = new RokPrzestepny();
         public string NameSort { get; set; }
         public string DateSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
-        public PaginatedList<RokPrzestepny> LeapYears_ { get; set; }
+        public PaginatedList<RokPrzestepny> LataPrzestepne { get; set; }
         public async Task OnGetAsync(string sortOrder,
             string currentFilter, string searchString, int? pageIndex)
         {
             if (_contextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {
                 var user_id = _contextAccessor.HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
-                object_toSearch.user_id = user_id.Value;
+                obiekt_doSzukania.user_id = user_id.Value;
                 
             }
             CurrentSort = sortOrder;
@@ -51,18 +51,18 @@ namespace AplikacjaLataPrzestepne.Pages
                 searchString = currentFilter;
             }
              
-            IQueryable<RokPrzestepny> studentsIQ = from s in _context.LeapData.OrderByDescending(x=>x.Data) select s;
+            IQueryable<RokPrzestepny> uzytkownicy = from s in _context.LeapData.OrderByDescending(x=>x.Data) select s;
             
             var pageSize = Configuration.GetValue("PageSize", 20);
-            LeapYears_ = await PaginatedList<RokPrzestepny>.CreateAsync(
-                studentsIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
+            LataPrzestepne = await PaginatedList<RokPrzestepny>.CreateAsync(
+                uzytkownicy.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
         public IActionResult OnPost(int id_User)
         {    
-            object_toSearch = _context.LeapData.Find(id_User);
+            obiekt_doSzukania = _context.LeapData.Find(id_User);
             
-            object_toSearch.Id = id_User;
-            _context.LeapData.Remove(object_toSearch);
+            obiekt_doSzukania.Id = id_User;
+            _context.LeapData.Remove(obiekt_doSzukania);
             _context.SaveChanges();
             
             return RedirectToAction("Async");

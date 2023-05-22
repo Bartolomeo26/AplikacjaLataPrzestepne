@@ -4,52 +4,43 @@
 
 <h2>Users</h2>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-
-<form asp-page="./Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-primary" /> |
-            <a asp-page="./Index">Back to full List</a>
-        </p>
-    </div>
-</form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.LeapYears_[0].user_id)
+                @Html.DisplayNameFor(model => model.LataPrzestepne[0].user_id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeapYears_[0].login)
+                @Html.DisplayNameFor(model => model.LataPrzestepne[0].login)
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
-                    @Html.DisplayNameFor(model => model.LeapYears_[0].Rok)
+                    @Html.DisplayNameFor(model => model.LataPrzestepne[0].Rok)
                 </a>
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
-                @Html.DisplayNameFor(model => model.LeapYears_[0].Imie)
+                @Html.DisplayNameFor(model => model.LataPrzestepne[0].Imie)
                 </a>
             </th>
             <th>
+
+                @Html.DisplayNameFor(model => model.LataPrzestepne[0].czy_przestepny)
+
+            </th>
+            <th>
                 
-                    @Html.DisplayNameFor(model => model.LeapYears_[0].Data)
+                    @Html.DisplayNameFor(model => model.LataPrzestepne[0].Data)
                 
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.LeapYears_)
+        @foreach (var item in Model.LataPrzestepne)
         {
             <tr>
                 <td>
@@ -65,13 +56,16 @@
                     @Html.DisplayFor(modelItem => item.Imie)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.czy_przestepny)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
-                @if(item.user_id==Model.object_toSearch.user_id && item.user_id!=null)
+                @if(item.user_id==Model.obiekt_doSzukania.user_id && item.user_id!=null)
                { <form method="post">
                 <td>
                     <input name="id_User" value="@item.Id" type="hidden"/>
-                    <button type="submit">Delete</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
                 </td>
                 </form>
                }
@@ -81,20 +75,20 @@
 </table>
 
 @{
-    var prevDisabled = !Model.LeapYears_.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.LeapYears_.HasNextPage ? "disabled" : "";
+    var prevDisabled = !Model.LataPrzestepne.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.LataPrzestepne.HasNextPage ? "disabled" : "";
 }
 
 <a asp-page="./List"
    asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.LeapYears_.PageIndex - 1)"
+   asp-route-pageIndex="@(Model.LataPrzestepne.PageIndex - 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
    class="btn btn-primary @prevDisabled">
     Previous
 </a>
 <a asp-page="./List"
    
-   asp-route-pageIndex="@(Model.LeapYears_.PageIndex + 1)"
+   asp-route-pageIndex="@(Model.LataPrzestepne.PageIndex + 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
    class="btn btn-primary @nextDisabled">
     Next

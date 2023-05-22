@@ -13,7 +13,7 @@ namespace AplikacjaLataPrzestepne.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         [BindProperty]
-        public RokPrzestepny FizzBuzz
+        public RokPrzestepny rok_przestepny
         {
             get; set;
         } = new RokPrzestepny();
@@ -40,39 +40,39 @@ namespace AplikacjaLataPrzestepne.Pages
         public IActionResult OnPost()
         {
 
-            FizzBuzz.Data = DateTime.Now;
+            this.rok_przestepny.Data = DateTime.Now;
             if (_contextAccessor.HttpContext.User.Identity.IsAuthenticated)
             { var user_id = _contextAccessor.HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
-                FizzBuzz.user_id = user_id.Value;
-                FizzBuzz.login = _contextAccessor.HttpContext.User.Identity.Name;
+                this.rok_przestepny.user_id = user_id.Value;
+                this.rok_przestepny.login = _contextAccessor.HttpContext.User.Identity.Name;
             }
 
 
             string rok_przestepny;
 
 
-            if ((FizzBuzz.Rok % 4 == 0 && FizzBuzz.Rok % 100 != 0) || FizzBuzz.Rok % 400 == 0)
+            if ((this.rok_przestepny.Rok % 4 == 0 && this.rok_przestepny.Rok % 100 != 0) || this.rok_przestepny.Rok % 400 == 0)
             {
-                rok_przestepny = "To był rok przestępny."; FizzBuzz.czy_przestepny = "rok przestępny";
+                rok_przestepny = "To był rok przestępny."; this.rok_przestepny.czy_przestepny = "rok przestępny";
             }
             else
             {
-                rok_przestepny = "To nie był rok przestępny."; FizzBuzz.czy_przestepny = "rok nieprzestępny";
+                rok_przestepny = "To nie był rok przestępny."; this.rok_przestepny.czy_przestepny = "rok nieprzestępny";
             }
 
-            string result = FizzBuzz.Imie + " urodził się w " + FizzBuzz.Rok + " roku. " + rok_przestepny;
-            string result1 = FizzBuzz.Rok + " rok. " + rok_przestepny;
-            if (!String.IsNullOrEmpty(FizzBuzz.Imie) && !String.IsNullOrEmpty(FizzBuzz.Rok.ToString()))
+            string result = this.rok_przestepny.Imie + " urodził się w " + this.rok_przestepny.Rok + " roku. " + rok_przestepny;
+            string result1 = this.rok_przestepny.Rok + " rok. " + rok_przestepny;
+            if (!string.IsNullOrEmpty(this.rok_przestepny.Imie) && !string.IsNullOrEmpty(this.rok_przestepny.Rok.ToString()))
             {
                 ViewData["message"] = result;
-                _context.LeapData.Add(FizzBuzz);
+                _context.LeapData.Add(this.rok_przestepny);
                 _context.SaveChanges();
 
             }
-            else if (!String.IsNullOrEmpty(FizzBuzz.Rok.ToString()))
+            else if (!string.IsNullOrEmpty(this.rok_przestepny.Rok.ToString()))
             {
                 ViewData["message"] = result1;
-                _context.LeapData.Add(FizzBuzz);
+                _context.LeapData.Add(this.rok_przestepny);
                 _context.SaveChanges();
             }
             
