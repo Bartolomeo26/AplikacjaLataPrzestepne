@@ -17,7 +17,7 @@ namespace AplikacjaLataPrzestepne.Pages
             get; set;
         } = new RokPrzestepny();
 
-        public Session FizzBuzzSession { get; set; } = new Session();
+        
         private readonly Wyszukiwania _context;
 
         public IndexModel(ILogger<IndexModel> logger, Wyszukiwania context)
@@ -28,18 +28,18 @@ namespace AplikacjaLataPrzestepne.Pages
         }
 
 
-        public IList<RokPrzestepny> Lata { get; set; } = new List<RokPrzestepny>();
+        
         public void OnGet()
         {
-           
 
+            
+            
         }
-
 
         public IActionResult OnPost()
         {
-            
 
+            FizzBuzz.Data = DateTime.Now;
             string rok_przestepny;
 
 
@@ -57,22 +57,19 @@ namespace AplikacjaLataPrzestepne.Pages
             if (!String.IsNullOrEmpty(FizzBuzz.Imie) && !String.IsNullOrEmpty(FizzBuzz.Rok.ToString()))
             {
                 ViewData["message"] = result;
-
-                
+                _context.LeapData.Add(FizzBuzz);
+                _context.SaveChanges();
 
             }
             else if (!String.IsNullOrEmpty(FizzBuzz.Rok.ToString()))
             {
                 ViewData["message"] = result1;
-                
-
+                _context.LeapData.Add(FizzBuzz);
+                _context.SaveChanges();
             }
             
 
-            _context.DanePrzestepne.Add(FizzBuzz);
-            _context.SaveChanges();
-
-            return RedirectToPage("./Index");
+            return Page();
 
 
         }

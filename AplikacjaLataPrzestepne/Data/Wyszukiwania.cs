@@ -8,7 +8,7 @@ namespace AplikacjaLataPrzestepne.Data
     {
         public Wyszukiwania(DbContextOptions options) : base(options) { }
 
-        public DbSet<RokPrzestepny> DanePrzestepne { get; set; }
+        public DbSet<RokPrzestepny> LeapData { get; set; }
 
     }
 }

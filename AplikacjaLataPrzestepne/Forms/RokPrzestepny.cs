@@ -9,6 +9,7 @@ namespace AplikacjaLataPrzestepne.Forms
     public class RokPrzestepny
     {
         [Key]
+        public int Id { get; set; }
         [DisplayName("Rok")]
         [Required, Range(1899, 2022, ErrorMessage = "Oczekiwana wartość {0} z zakresu {1} i {2}.")]
         
@@ -17,7 +18,7 @@ namespace AplikacjaLataPrzestepne.Forms
         
         public string? Imie { get; set; }
 
-        
-        public string? czy_przestepny { get; set; }
+        public DateTime Data { get; set; }
+        public string czy_przestepny { get; set; }
     }
 }
