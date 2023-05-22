@@ -23,6 +23,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.LeapYears_[0].user_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeapYears_[0].login)
+            </th>
+            <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.LeapYears_[0].Rok)
@@ -45,6 +51,12 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.user_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.login)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Rok)
                 </td>
                 <td>
@@ -53,9 +65,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
+                @if(item.user_id==Model.object_toSearch.user_id && item.user_id!=null)
+               { <form method="post">
                 <td>
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <input name="id_User" value="@item.Id" type="hidden"/>
+                    <button type="submit">Delete</button>
                 </td>
+                </form>
+               }
             </tr>
         }
     </tbody>
