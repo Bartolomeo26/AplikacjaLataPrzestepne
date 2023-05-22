@@ -1,6 +1,6 @@
 using AplikacjaLataPrzestepne.Data;
 using AplikacjaLataPrzestepne.Forms;
-using ContosoUniversity;
+using ListLeapYears;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +32,7 @@ namespace AplikacjaLataPrzestepne.Pages
         {
             CurrentSort = sortOrder;
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            DateSort = sortOrder == "Date" ? "date_asc" : "Date";
             if (searchString != null)
             {
                 pageIndex = 1;

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContosoUniversity
+
+namespace ListLeapYears
 {
     public class PaginatedList<T> : List<T>
     {
@@ -16,7 +17,7 @@ namespace ContosoUniversity
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
 
-            this.AddRange(items);
+            this.AddRange(items.Reverse<T>());
         }
 
         public bool HasPreviousPage => PageIndex > 1;
