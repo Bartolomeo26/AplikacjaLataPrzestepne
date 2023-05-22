@@ -50,8 +50,9 @@ namespace AplikacjaLataPrzestepne.Pages
             {
                 searchString = currentFilter;
             }
-            IQueryable<RokPrzestepny> studentsIQ = from s in _context.LeapData
-                                                   select s;
+             
+            IQueryable<RokPrzestepny> studentsIQ = from s in _context.LeapData.OrderByDescending(x=>x.Data) select s;
+            
             var pageSize = Configuration.GetValue("PageSize", 20);
             LeapYears_ = await PaginatedList<RokPrzestepny>.CreateAsync(
                 studentsIQ.AsNoTracking(), pageIndex ?? 1, pageSize);

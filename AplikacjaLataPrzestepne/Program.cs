@@ -44,7 +44,7 @@ else
 }
 
 
-app.UseHttpsRedirection();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

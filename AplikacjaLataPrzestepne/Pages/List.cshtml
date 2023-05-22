@@ -2,7 +2,7 @@
 @model AplikacjaLataPrzestepne.Pages.ListModel
 
 
-<h2>Students</h2>
+<h2>Users</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -29,19 +29,21 @@
                 @Html.DisplayNameFor(model => model.LeapYears_[0].login)
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
                    asp-route-currentFilter="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.LeapYears_[0].Rok)
                 </a>
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
                 @Html.DisplayNameFor(model => model.LeapYears_[0].Imie)
+                </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
-                   asp-route-currentFilter="@Model.CurrentFilter">
+                
                     @Html.DisplayNameFor(model => model.LeapYears_[0].Data)
-                </a>
+                
             </th>
             <th></th>
         </tr>
@@ -83,15 +85,15 @@
     var nextDisabled = !Model.LeapYears_.HasNextPage ? "disabled" : "";
 }
 
-<a asp-page="./Index"
+<a asp-page="./List"
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.LeapYears_.PageIndex - 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
    class="btn btn-primary @prevDisabled">
     Previous
 </a>
-<a asp-page="./Index"
-   asp-route-sortOrder="@Model.CurrentSort"
+<a asp-page="./List"
+   
    asp-route-pageIndex="@(Model.LeapYears_.PageIndex + 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
    class="btn btn-primary @nextDisabled">
